@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FYNEST | Help Center</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="index.html" class="brand-logo">FYNEST</a>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="index.html#collections" class="nav-link">Shop</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="faq.html" class="nav-link nav-active">Help</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="section-header">
+                <h2>FREQUENTLY <span class="text-accent">ASKED</span></h2>
+                <!-- Simple Search for FAQ -->
+                <div class="search-container">
+                    <input type="text" id="faqSearch" placeholder="Search questions..." class="search-input"
+                        style="width: 250px;">
+                </div>
+            </div>
+
+            <div class="faq-container" id="faqList">
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <span>How long does shipping take?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24">
+                            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>Orders are processed within 24 hours. Standard shipping takes 2-3 business days within Java
+                            and 4-7 days for other regions.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <span>What is your return policy?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24">
+                            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>We accept returns within 7 days of delivery if the item is unworn and tags are attached.
+                            Please contact support to initiate a return.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <span>Do you ship internationally?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24">
+                            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>Yes, we ship to selected countries in Southeast Asia (Singapore, Malaysia, Thailand,
+                            Philippines).</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <span>How do I track my order?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24">
+                            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>Once shipped, you will receive a tracking number via email/WhatsApp which you can check on
+                            our courier partner's website.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="brand-logo" style="margin-bottom: 20px; font-size: 1.5rem;">FYNEST</div>
+        <div style="margin-bottom: 20px;">
+            <p>Contact: support@fynest.com | +62 812 3456 7890</p>
+        </div>
+        <p class="footer-text">&copy; 2024 FYNEST CLOTHING. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Inline Accordion Logic
+        document.querySelectorAll('.faq-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // Inline Search Logic
+        const searchInput = document.getElementById('faqSearch');
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-header span').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-body').textContent.toLowerCase();
+
+                if (question.includes(term) || answer.includes(term)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

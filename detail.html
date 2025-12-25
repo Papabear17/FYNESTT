@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detail Look — WILI ATELIER</title>
+  <link rel="stylesheet" href="detail_style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="detail-nav">
+      <div class="nav-left">
+        <a href="index.html" class="back-link">← Back to Atelier</a>
+      </div>
+      <div class="nav-center">
+        <span class="brand-mark">WA</span>
+        <span class="brand-name">WILI ATELIER</span>
+      </div>
+      <div class="nav-right">
+        <span class="pill" id="pillSeason">AW 24/25</span>
+      </div>
+    </header>
+
+    <main class="detail-layout">
+      <section class="gallery-column">
+        <div class="primary-media" id="primaryMedia">
+          <!-- Gambar utama terisi dari detail_script.js -->
+        </div>
+        <div class="thumb-row" id="thumbRow">
+          <!-- Thumbnail galeri terisi dinamis -->
+        </div>
+      </section>
+
+      <section class="info-column">
+        <p class="category-label" id="categoryLabel">LOOK</p>
+        <h1 class="look-title" id="lookTitle">Look Title</h1>
+        <p class="price" id="lookPrice">Rp -</p>
+
+        <div class="meta-row">
+          <div class="meta-block">
+            <span class="meta-label">Color Story</span>
+            <span class="meta-value" id="metaColor">—</span>
+          </div>
+          <div class="meta-block">
+            <span class="meta-label">Season</span>
+            <span class="meta-value" id="metaSeason">—</span>
+          </div>
+          <div class="meta-block">
+            <span class="meta-label">Label</span>
+            <span class="meta-value" id="metaFeatured">—</span>
+          </div>
+        </div>
+
+        <p class="description" id="description">
+          Deskripsi look akan muncul di sini.
+        </p>
+
+        <div class="tag-row" id="tagRow">
+          <!-- Tag style terisi dinamis -->
+        </div>
+
+        <div class="note">
+          <p>
+            Halaman ini adalah etalase visual look Anda. Harga ditampilkan sebagai referensi,
+            tanpa fitur checkout atau pembelian langsung di website ini. Semua konten dikelola dari
+            <strong>Admin Dashboard</strong>.
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="detail_script.js"></script>
+</body>
+</html>
+
+

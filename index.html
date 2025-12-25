@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FYNEST | Streetwear Essentials</title>
+
+  <!-- Three.js CDN -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.160.0/examples/js/controls/OrbitControls.js"></script>
+
+  <!-- Central Configuration (MUST BE FIRST) -->
+  <script src="config.js"></script>
+
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <header class="navbar">
+    <a href="#" class="brand-logo" onclick="navigateTo('home')">FYNEST</a>
+    <nav class="nav-links">
+      <div class="search-container js-search-container">
+        <input type="text" id="searchInput" placeholder="Search products..." class="search-input">
+      </div>
+      <a onclick="navigateTo('home')" class="nav-link active" data-page="home">Shop</a>
+      <a onclick="navigateTo('lookbook')" class="nav-link" data-page="lookbook">Lookbook</a>
+      <a onclick="navigateTo('about')" class="nav-link" data-page="about">About</a>
+      <a onclick="navigateTo('faq')" class="nav-link" data-page="faq">Help</a>
+      <a href="admin_index.html" class="nav-link nav-admin">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- PAGE: HOME -->
+    <div id="page-home" class="page-section active">
+      <section class="hero">
+        <div class="hero-content">
+          <span class="hero-badge">NEW COLLECTION 2024</span>
+          <h1 class="hero-title">REDEFINE <span class="text-accent">YOUR STYLE</span></h1>
+          <p class="hero-subtitle">Premium streetwear for the modern individual.</p>
+          <div class="hero-buttons">
+            <a href="https://vt.tiktok.com/ZSPfAKQNU/?page=Mall" target="_blank" class="btn primary-btn"
+              style="text-decoration: none;">SHOP NOW</a>
+            <a onclick="navigateTo('about')" class="btn ghost-btn">EXPLORE</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3D SECTION (Kept simple) -->
+      <section class="section">
+        <div class="section-header">
+          <h2>INTERACTIVE <span class="text-accent">IDENTITY</span></h2>
+        </div>
+        <div class="canvas-container" id="logo3DContainer"><canvas id="mannequinCanvas"></canvas></div>
+      </section>
+
+      <section id="collections" class="section">
+        <div class="section-header">
+          <h2>LATEST <span class="text-accent">DROPS</span></h2>
+          <div class="header-controls">
+            <div id="categoryFilters" class="filter-buttons"></div>
+          </div>
+        </div>
+        <div id="productGrid" class="product-grid"></div>
+      </section>
+    </div>
+
+    <!-- PAGE: LOOKBOOK -->
+    <div id="page-lookbook" class="page-section">
+      <section class="section">
+        <div class="section-header">
+          <h2>VISUAL <span class="text-accent">ARCHIVE</span></h2>
+          <p>Explore the FYNEST collection in detail.</p>
+        </div>
+        <div id="lookbookGrid" class="lookbook-grid">
+          <!-- Masonry content injected via script -->
+        </div>
+      </section>
+    </div>
+
+    <!-- PAGE: ABOUT -->
+    <div id="page-about" class="page-section">
+      <section class="section" style="text-align: center;">
+        <div class="section-header" style="justify-content: center; text-align: center; display: block;">
+          <h2>OUR <span class="text-accent">JOURNEY</span></h2>
+          <p style="max-width: 600px; margin: 0 auto;">From a humble garage project to a defining voice in streetwear
+            culture.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content"><span class="timeline-date">2020</span>
+              <h3>The Inception</h3>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content"><span class="timeline-date">2021</span>
+              <h3>First Collection</h3>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content"><span class="timeline-date">2024</span>
+              <h3>FYNEST Era</h3>
+            </div>
+          </div>
+        </div>
+        <div
+          style="margin-top: 60px; padding: 40px; background: var(--bg-soft); border-radius: var(--radius-md); text-align:left;">
+          <h2 style="margin-bottom:20px;">VISION & MISSION</h2>
+          <p>To become the global standard for premium, accessible streetwear.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- PAGE: FAQ -->
+    <div id="page-faq" class="page-section">
+      <section class="section">
+        <div class="section-header">
+          <h2>FREQUENTLY <span class="text-accent">ASKED</span></h2>
+          <div class="search-container"><input type="text" id="faqSearch" placeholder="Search questions..."
+              class="search-input" style="width: 250px;"></div>
+        </div>
+        <div class="faq-container" id="faqList">
+          <div class="faq-item">
+            <div class="faq-header"><span>How long does shipping take?</span><svg class="faq-icon" viewBox="0 0 24 24">
+                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+              </svg></div>
+            <div class="faq-body">
+              <p>Orders are processed within 24 hours. Standard shipping takes 2-3 business days.</p>
+            </div>
+          </div>
+          <!-- More items hardcoded/injected mostly via HTML structure here for simplicity -->
+          <div class="faq-item">
+            <div class="faq-header"><span>What is your return policy?</span><svg class="faq-icon" viewBox="0 0 24 24">
+                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+              </svg></div>
+            <div class="faq-body">
+              <p>We accept returns within 7 days of delivery for unworn items.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- PAGE: STORES -->
+    <div id="page-stores" class="page-section">
+      <section class="section">
+        <div class="section-header">
+          <h2>FIND <span class="text-accent">US</span></h2>
+          <p>Visit our physical locations</p>
+        </div>
+        <div class="map-container">
+          <p>[ Interactive Map Interface ]</p>
+        </div>
+        <div id="storeGrid" class="store-grid"></div>
+      </section>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="brand-logo" style="margin-bottom: 20px; font-size: 1.5rem;">FYNEST</div>
+    <div style="margin-bottom: 20px; display: flex; gap: 20px; justify-content: center; font-size: 0.9rem;">
+      <a onclick="navigateTo('stores')" style="text-decoration: underline;">Store Locator</a>
+      <a onclick="navigateTo('faq')" style="text-decoration: underline;">FAQ & Help</a>
+      <a onclick="navigateTo('about')" style="text-decoration: underline;">About Us</a>
+      <a href="admin_index.html" style="text-decoration: underline; color: #555;">Admin Panel</a>
+    </div>
+    <div style="margin-bottom: 20px;">
+      <span style="border: 1px solid #333; padding: 2px 6px; border-radius: 4px; margin: 0 4px;">VISA</span>
+      <span style="border: 1px solid #333; padding: 2px 6px; border-radius: 4px; margin: 0 4px;">MC</span>
+    </div>
+    <p class="footer-text">&copy; 2024 FYNEST CLOTHING. All rights reserved.</p>
+  </footer>
+
+  <!-- PRODUCT DETAIL MODAL -->
+  <div id="productModal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal(event)">&times;</button>
+      <div class="modal-body">
+        <div class="modal-image-col">
+          <div class="gallery-container">
+            <div class="gallery-main">
+              <button class="gallery-nav prev" onclick="prevSlide(event)">&#10094;</button>
+              <img id="modalImage" src="" alt="Product">
+              <button class="gallery-nav next" onclick="nextSlide(event)">&#10095;</button>
+            </div>
+            <div class="gallery-thumbs" id="modalThumbs">
+              <!-- Thumbnails injected via script -->
+            </div>
+          </div>
+        </div>
+        <div class="modal-info-col">
+          <span id="modalCategory" class="hero-badge">CATEGORY</span>
+          <h2 id="modalTitle" class="modal-title">Product Title</h2>
+          <p id="modalPrice" class="modal-price">IDR 000.000</p>
+          <div class="modal-divider"></div>
+          <p id="modalDesc" class="modal-desc">Description goes here.</p>
+
+          <div class="modal-actions">
+            <a href="https://vt.tiktok.com/ZSPfAKQNU/?page=Mall" target="_blank" class="btn primary-btn"
+              style="width: 100%; text-decoration: none;">BUY NOW</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- External Script -->
+  <script src="script.js"></script>
+</body>
+
+</html>

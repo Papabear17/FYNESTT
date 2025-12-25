@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FYNEST | Store Locator</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="index.html" class="brand-logo">FYNEST</a>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="index.html#collections" class="nav-link">Shop</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="faq.html" class="nav-link">Help</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="section-header">
+                <h2>FIND <span class="text-accent">US</span></h2>
+                <p>Visit our physical locations</p>
+            </div>
+
+            <!-- Mock Map -->
+            <div class="map-container">
+                <p>[ Interactive Map Interface Loaded Here ]</p>
+                <!-- In production, embed Google Maps iframe here -->
+            </div>
+
+            <div id="storeGrid" class="store-grid">
+                <!-- Stores injected by JS -->
+                <div class="loading-spinner">Loading locations...</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="brand-logo" style="margin-bottom: 20px; font-size: 1.5rem;">FYNEST</div>
+        <div style="margin-bottom: 20px;">
+            <p>Contact: support@fynest.com | +62 812 3456 7890</p>
+        </div>
+        <p class="footer-text">&copy; 2024 FYNEST CLOTHING. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Inline script for page-specific logic or extension
+        document.addEventListener('DOMContentLoaded', async () => {
+            const grid = document.getElementById('storeGrid');
+            if (!grid) return;
+
+            try {
+                const response = await fetch('data/stores.json');
+                const stores = await response.json();
+
+                grid.innerHTML = '';
+                stores.forEach(store => {
+                    grid.innerHTML += `
+                    <article class="store-card">
+                        <img src="${store.image}" alt="${store.name}" class="store-image">
+                        <div class="store-info">
+                            <h3 class="store-name">${store.name}</h3>
+                            <p class="store-address">${store.address}</p>
+                            <a href="#" class="btn ghost-btn" style="width:100%">Get Directions</a>
+                        </div>
+                    </article>
+                `;
+                });
+            } catch (e) {
+                grid.innerHTML = '<p>Unable to load store locations.</p>';
+            }
+        });
+    </script>
+</body>
+
+</html>

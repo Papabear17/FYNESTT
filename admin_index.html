@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FYNEST Admin</title>
+
+  <!-- Central Configuration (MUST BE FIRST) -->
+  <script src="config.js"></script>
+
+  <link rel="stylesheet" href="admin_style.css" />
+</head>
+
+<body>
+  <div class="admin-shell">
+    <!-- SIMPLE LOGIN GATE -->
+    <div class="login-overlay" id="loginOverlay">
+      <div class="login-card">
+        <div class="login-header">
+          <div class="brand-mark">FY</div>
+          <div class="brand-text">
+            <span class="brand-name">FYNEST</span>
+            <span class="brand-sub">Admin Access</span>
+          </div>
+        </div>
+        <form id="loginForm" class="login-form" onsubmit="return false;">
+          <div class="field full">
+            <label for="loginUsername">Username</label>
+            <input id="loginUsername" type="text" placeholder="admin" required />
+          </div>
+          <div class="field full">
+            <label for="loginPassword">Password</label>
+            <input id="loginPassword" type="password" placeholder="••••••••" required />
+          </div>
+          <p class="helper">
+            Credentials: <strong>wili</strong> / <strong>wiliam</strong>
+          </p>
+          <button type="submit" class="btn primary full-width">LOGIN</button>
+          <div style="text-align: center; margin-top: 15px;">
+            <a href="index.html" style="color: #666; font-size: 0.8rem; text-decoration: none;">&larr; Back to
+              Website</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <header class="admin-header">
+      <div class="brand">
+        <div class="brand-mark">FY</div>
+        <div class="brand-text">
+          <span class="brand-name">FYNEST</span>
+          <span class="brand-sub">Admin Studio</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <button id="btnLogout" class="pill-link pill-logout">LOGOUT</button>
+        <a href="index.html" class="pill-link">BACK TO HOME</a>
+      </div>
+    </header>
+
+    <main class="admin-main">
+      <!-- DASHBOARD STATS -->
+      <section class="dashboard-grid">
+        <div class="stat-card">
+          <div class="stat-title">Total Products</div>
+          <div class="stat-value" id="statTotalProducts">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-title">Asset Value</div>
+          <div class="stat-value" id="statAssetValue">Rp 0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-title">Active Promos</div>
+          <div class="stat-value" id="statActivePromos">0</div>
+        </div>
+      </section>
+
+      <!-- SITE EDITOR & PROMOS -->
+      <div class="split-panels">
+        <!-- Site Config -->
+        <section class="panel">
+          <div class="panel-header">
+            <h2>Website Banner</h2>
+            <p>Customize the main hero section text.</p>
+          </div>
+          <form id="siteConfigForm" class="form-grid" style="grid-template-columns: 1fr;">
+            <div class="field">
+              <label>Hero Title</label>
+              <input id="cfgHeroTitle" type="text" placeholder="REDEFINE YOUR STYLE" />
+            </div>
+            <div class="field">
+              <label>Hero Subtitle</label>
+              <input id="cfgHeroSubtitle" type="text" placeholder="Premium streetwear..." />
+            </div>
+            <div class="field">
+              <label>Button Text</label>
+              <input id="cfgHeroBtn" type="text" placeholder="SHOP NOW" />
+            </div>
+            <button type="submit" class="btn primary">Update Banner</button>
+            <button type="button" id="resetBanner" class="btn ghost">Reset Default</button>
+          </form>
+        </section>
+
+        <!-- Promo Manager -->
+        <section class="admin-section" id="section-promo">
+          <div class="section-header">
+            <h2>PROMO MANAGER</h2>
+            <p>Create discount codes.</p>
+          </div>
+          <div class="card">
+            <div class="form-grid">
+              <div class="field">
+                <label>Promo Code</label>
+                <input type="text" id="promoCode" placeholder="e.g. SALE50">
+              </div>
+              <div class="field">
+                <label>Discount Info (Text)</label>
+                <input type="text" id="promoDiscount" placeholder="e.g. 50% OFF All Items">
+              </div>
+            </div>
+            <button id="btnAddPromo" class="btn-primary" style="margin-top:20px;">Activate Promo</button>
+
+            <div id="activePromoContainer" style="margin-top:30px;">
+              <!-- Active promo card will appear here -->
+            </div>
+          </div>
+        </section>
+
+        <!-- APPEARANCE SETTINGS -->
+        <section class="admin-section" id="section-appearance">
+          <div class="section-header">
+            <h2>TAMPILAN WEBSITE</h2>
+            <p>Ubah warna, font, dan teks utama website.</p>
+          </div>
+
+          <div class="card">
+            <h3>Warna & Font</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label>Warna Background</label>
+                <div class="color-input-wrapper">
+                  <input type="color" id="colorBg" value="#05060a">
+                  <input type="text" id="colorBgHex" value="#05060a" readonly>
+                </div>
+              </div>
+              <div class="field">
+                <label>Warna Teks Utama</label>
+                <div class="color-input-wrapper">
+                  <input type="color" id="colorText" value="#f7f4f0">
+                  <input type="text" id="colorTextHex" value="#f7f4f0" readonly>
+                </div>
+              </div>
+              <div class="field">
+                <label>Warna Aksen (Emas/Tombol)</label>
+                <div class="color-input-wrapper">
+                  <input type="color" id="colorAccent" value="#e4b98f">
+                  <input type="text" id="colorAccentHex" value="#e4b98f" readonly>
+                </div>
+              </div>
+              <div class="field">
+                <label>Warna Sekunder</label>
+                <div class="color-input-wrapper">
+                  <input type="color" id="colorSecondary" value="#1a1a1a">
+                  <input type="text" id="colorSecondaryHex" value="#1a1a1a" readonly>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-grid" style="margin-top:20px;">
+              <div class="field">
+                <label>Font Judul (Heading)</label>
+                <select id="fontHeading">
+                  <option value="Cinzel">Cinzel</option>
+                  <option value="Playfair Display">Playfair Display</option>
+                  <option value="Prata">Prata</option>
+                  <option value="Oswald">Oswald</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Font Isi (Body)</label>
+                <select id="fontBody">
+                  <option value="Inter">Inter</option>
+                  <option value="Roboto">Roboto</option>
+                  <option value="Lato">Lato</option>
+                  <option value="Open Sans">Open Sans</option>
+                </select>
+              </div>
+            </div>
+
+            <hr style="border-color:rgba(255,255,255,0.1); margin: 30px 0;">
+
+            <h3>Teks Utama (Hero Section)</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label>Judul Besar</label>
+                <input type="text" id="heroTitle" placeholder="FYNEST">
+              </div>
+              <div class="field">
+                <label>Sub-judul</label>
+                <input type="text" id="heroSubtitle" placeholder="Premium Streetwear">
+              </div>
+            </div>
+
+            <div class="actions" style="margin-top:30px;">
+              <button id="btnSaveAppearance" class="btn-primary">SIMPAN TAMPILAN</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="panel panel-form">
+        <div class="panel-header">
+          <h2 id="formTitle">Create Look</h2>
+          <p>Tambah atau edit look produk.</p>
+        </div>
+        <form id="productForm" class="form-grid">
+          <input type="hidden" id="fieldId" />
+
+          <div class="field">
+            <label for="fieldName">Nama Look</label>
+            <input id="fieldName" type="text" placeholder="Noir Tailored Suit" required />
+          </div>
+
+          <div class="field">
+            <label for="fieldCategory">Kategori</label>
+            <input id="fieldCategory" type="text" placeholder="Evening / Gown / Outerwear" />
+          </div>
+
+          <div class="field">
+            <label for="fieldPrice">Harga (IDR)</label>
+            <input id="fieldPrice" type="number" min="0" step="10000" placeholder="12000000" />
+          </div>
+
+          <div class="field">
+            <label for="fieldStock">Stok Barang</label>
+            <input id="fieldStock" type="number" min="0" placeholder="e.g. 12" />
+          </div>
+
+          <div class="field">
+            <label for="fieldColorStory">Color Story</label>
+            <input id="fieldColorStory" type="text" placeholder="Deep Noir" />
+          </div>
+
+          <div class="field">
+            <label for="fieldSeason">Season</label>
+            <input id="fieldSeason" type="text" placeholder="AW 24/25" />
+          </div>
+
+          <div class="field full">
+            <label for="fieldCoverFile">Upload Cover Image (File Explorer)</label>
+            <input id="fieldCoverFile" type="file" accept="image/*" />
+            <small class="helper">
+              Pilih gambar dari komputer. Gambar akan disimpan di browser (base64).
+            </small>
+          </div>
+
+          <div class="field full">
+            <label for="fieldGalleryFiles">Upload Gallery Images (bisa pilih banyak)</label>
+            <input id="fieldGalleryFiles" type="file" accept="image/*" multiple />
+            <small class="helper">
+              Pilih beberapa gambar sekaligus untuk gallery produk.
+            </small>
+          </div>
+
+          <div class="field full">
+            <label for="fieldShortDescription">Short Description</label>
+            <textarea id="fieldShortDescription" rows="2" placeholder="1–2 kalimat singkat tentang look."></textarea>
+          </div>
+
+          <div class="field full">
+            <label for="fieldDescription">Deskripsi Penuh</label>
+            <div class="toolbar-editor">
+              <button type="button" onclick="formatText('b')" title="Bold"><b>B</b></button>
+              <button type="button" onclick="formatText('i')" title="Italic"><i>I</i></button>
+              <button type="button" onclick="formatText('small')" title="Small Text"><small>S</small></button>
+              <button type="button" onclick="formatText('big')" title="Large Text"><big>L</big></button>
+              <select onchange="formatText('font', this.value); this.selectedIndex=0;" class="font-selector">
+                <option value="">Font Family</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Arial">Arial</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Helvetica">Helvetica</option>
+              </select>
+            </div>
+            <textarea id="fieldDescription" rows="5"
+              placeholder="Narasi detail tentang siluet, bahan, dan momen pemakaian. Gunakan tombol di atas untuk format."></textarea>
+          </div>
+
+          <div class="field full">
+            <label for="fieldTags">Tags (pisahkan dengan koma)</label>
+            <input id="fieldTags" type="text" placeholder="Signature, Evening, Tailoring" />
+          </div>
+
+          <div class="field checkbox-row">
+            <label class="checkbox">
+              <input id="fieldFeatured" type="checkbox" />
+              <span> Jadikan Signature / Featured Look</span>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn primary" id="btnSave">Save Look</button>
+            <button type="button" class="btn ghost" id="btnReset">Reset Form</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel panel-3d">
+        <div class="panel-header">
+          <h2>3D Model Settings</h2>
+          <p>Upload foto manekin untuk mengganti tampilan 3D di homepage. Jika tidak diisi, akan menggunakan manekin 3D
+            default.</p>
+        </div>
+        <div class="form-grid">
+          <div class="field full">
+            <label for="field3DModelImage">URL Foto 3D Model</label>
+            <input id="field3DModelImage" type="url"
+              placeholder="https://images.pexels.com/... atau kosongkan untuk pakai 3D default" />
+          </div>
+          <div class="field full">
+            <label for="field3DModelFile">Upload Foto 3D Model (File Explorer)</label>
+            <input id="field3DModelFile" type="file" accept="image/*" />
+            <small class="helper">
+              Pilih foto manekin/baju dari komputer. Foto akan disimpan di browser (base64) dan otomatis mengisi field
+              URL di atas.
+            </small>
+          </div>
+          <div class="field full">
+            <button type="button" class="btn ghost" id="btnRemove3D">Hapus Foto 3D (Kembali ke 3D Default)</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel-table">
+        <div class="panel-header">
+          <h2>Look Library</h2>
+          <p>Daftar semua look yang saat ini tampil di website.</p>
+        </div>
+        <div class="toolbar">
+          <input type="search" id="searchInput" placeholder="Cari nama / kategori / color story..." />
+          <button class="btn ghost" id="btnSeed">Reset ke Sample Data</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Nama</th>
+                <th>Kategori</th>
+                <th>Harga</th>
+                <th>Season</th>
+                <th>Featured</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="productTableBody">
+              <!-- Baris produk diisi dinamis -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="admin_script.js"></script>
+</body>
+
+</html>
